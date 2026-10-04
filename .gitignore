@@ -1,0 +1,20 @@
+# Maven build files
+target/
+
+# Java compiled files
+*.class
+
+# H2 database
+data/
+*.db
+*.mv.db
+*.lock.db
+*.trace.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Environment files
+.env

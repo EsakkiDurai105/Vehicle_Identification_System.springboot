@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard — VehicleMS</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="layout">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon" style="background:#58a6ff;">🚗</div>
+      <h2>VehicleMS</h2>
+      <p>User Portal</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">My Account</span>
+      <a th:href="@{/user/dashboard}" class="nav-link active">
+        <span class="nav-icon">🏠</span> Dashboard
+      </a>
+      <a th:href="@{/user/vehicles}" class="nav-link">
+        <span class="nav-icon">🚗</span> My Vehicles
+      </a>
+      <a th:href="@{/user/service-history}" class="nav-link">
+        <span class="nav-icon">🔧</span> Service History
+      </a>
+      <a th:href="@{/user/profile}" class="nav-link">
+        <span class="nav-icon">👤</span> Profile
+      </a>
+
+      <span class="nav-section-label">Info</span>
+      <a th:href="@{/user/workshops}" class="nav-link">
+        <span class="nav-icon">📍</span> Nearby Workshops
+      </a>
+    </nav>
+
+    <div class="nav-footer">
+      <form th:action="@{/logout}" method="post">
+        <button type="submit" class="nav-link" style="color:#ff8080; background:rgba(224,82,82,0.1); border:none; cursor:pointer; font-family:inherit;">
+          <span class="nav-icon">🚪</span> Logout
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ── -->
+  <main class="main-content">
+
+    <div class="topbar">
+      <div>
+        <h1>My Dashboard</h1>
+        <p>Hello, <span th:text="${username ?: 'User'}">User</span> — here's your overview</p>
+      </div>
+      <div class="topbar-right">
+        <div class="user-chip">
+          <div class="avatar" style="background:#58a6ff;">U</div>
+          <span style="font-size:0.88rem; font-weight:500;" th:text="${username ?: 'User'}">User</span>
+          <span style="font-size:0.72rem; color:#58a6ff; font-weight:700;">USER</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon amber">🚗</div>
+        <div>
+          <div class="stat-value" th:text="${myVehicles ?: '0'}">0</div>
+          <div class="stat-label">My Vehicles</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">✅</div>
+        <div>
+          <div class="stat-value" th:text="${activeInsurance ?: '0'}">0</div>
+          <div class="stat-label">Active Insurance</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon blue">🔧</div>
+        <div>
+          <div class="stat-value" th:text="${serviceCount ?: '0'}">0</div>
+          <div class="stat-label">Services Logged</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Menu Cards -->
+    <div class="section-title" style="margin-bottom:0;">🗂️ Quick Access</div>
+    <div class="menu-grid">
+
+      <a th:href="@{/user/vehicles}" class="menu-card">
+        <div class="menu-card-icon">🚗</div>
+        <h3>My Vehicles</h3>
+        <p>View and manage all vehicles registered under your account</p>
+      </a>
+
+      <a th:href="@{/user/service-history}" class="menu-card">
+        <div class="menu-card-icon">🔧</div>
+        <h3>Service History</h3>
+        <p>Check past maintenance records and upcoming service dates</p>
+      </a>
+
+      <a th:href="@{/user/profile}" class="menu-card">
+        <div class="menu-card-icon">👤</div>
+        <h3>My Profile</h3>
+        <p>Update your personal information and contact details</p>
+      </a>
+
+      <a th:href="@{/user/workshops}" class="menu-card">
+        <div class="menu-card-icon" style="background:rgba(88,166,255,0.1); color:#58a6ff;">📍</div>
+        <h3>Nearby Workshops</h3>
+        <p>Find authorised service centres close to you</p>
+      </a>
+
+    </div>
+
+  </main>
+</div>
+</body>
+</html>

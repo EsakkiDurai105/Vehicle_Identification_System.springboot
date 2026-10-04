@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — VehicleMS</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="layout">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">🚗</div>
+      <h2>VehicleMS</h2>
+      <p>Administrator Panel</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Main</span>
+      <a th:href="@{/admin/dashboard}" class="nav-link active">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+
+      <span class="nav-section-label">Management</span>
+      <a th:href="@{/admin/users}" class="nav-link">
+        <span class="nav-icon">👥</span> Manage Users
+      </a>
+      <a th:href="@{/admin/vehicles}" class="nav-link">
+        <span class="nav-icon">🚗</span> View Vehicles
+      </a>
+      <a th:href="@{/admin/owners}" class="nav-link">
+        <span class="nav-icon">🧑‍💼</span> Owners
+      </a>
+      <a th:href="@{/admin/workshops}" class="nav-link">
+        <span class="nav-icon">🔧</span> Workshops
+      </a>
+
+      <span class="nav-section-label">Analytics</span>
+      <a th:href="@{/admin/reports}" class="nav-link">
+        <span class="nav-icon">📈</span> Reports
+      </a>
+      <a th:href="@{/h2-console}" class="nav-link" target="_blank">
+        <span class="nav-icon">🗄️</span> Database Console
+      </a>
+    </nav>
+
+    <div class="nav-footer">
+      <form th:action="@{/logout}" method="post">
+        <button type="submit" class="nav-link btn-danger" style="color:#fff; background:rgba(224,82,82,0.15); border:none; cursor:pointer;">
+          <span class="nav-icon">🚪</span> Logout
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ── -->
+  <main class="main-content">
+
+    <div class="topbar">
+      <div>
+        <h1>Dashboard</h1>
+        <p>Welcome back, <span th:text="${adminName ?: 'Administrator'}">Administrator</span></p>
+      </div>
+      <div class="topbar-right">
+        <div class="user-chip">
+          <div class="avatar">A</div>
+          <span style="font-size:0.88rem; font-weight:500;" th:text="${adminName ?: 'Admin'}">Admin</span>
+          <span style="font-size:0.72rem; color:var(--amber); font-weight:700;">ADMIN</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon amber">🚗</div>
+        <div>
+          <div class="stat-value" th:text="${totalVehicles ?: '0'}">0</div>
+          <div class="stat-label">Total Vehicles</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon blue">👥</div>
+        <div>
+          <div class="stat-value" th:text="${totalOwners ?: '0'}">0</div>
+          <div class="stat-label">Registered Owners</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">🔧</div>
+        <div>
+          <div class="stat-value" th:text="${totalWorkshops ?: '0'}">0</div>
+          <div class="stat-label">Workshops</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon red">📋</div>
+        <div>
+          <div class="stat-value" th:text="${totalLogs ?: '0'}">0</div>
+          <div class="stat-label">Activity Logs</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions + Logs -->
+    <div class="section-grid">
+
+      <div class="card">
+        <div class="section-title">⚡ Quick Actions</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <a th:href="@{/admin/vehicles}" class="btn btn-outline" style="justify-content:flex-start;">🚗 View All Vehicles</a>
+          <a th:href="@{/admin/owners}" class="btn btn-outline" style="justify-content:flex-start;">🧑‍💼 Manage Owners</a>
+          <a th:href="@{/admin/reports}" class="btn btn-outline" style="justify-content:flex-start;">📈 Generate Report</a>
+          <a th:href="@{/admin/workshops}" class="btn btn-outline" style="justify-content:flex-start;">🔧 Workshop List</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">📋 Recent Activity</div>
+        <div th:if="${recentLogs != null and !#lists.isEmpty(recentLogs)}">
+          <div th:each="log : ${recentLogs}" style="padding:10px 0; border-bottom:1px solid var(--border); font-size:0.875rem;">
+            <div style="color:var(--white);" th:text="${log.action}">Action</div>
+            <div style="color:var(--muted); font-size:0.78rem;" th:text="${log.timestamp}">Time</div>
+          </div>
+        </div>
+        <div th:if="${recentLogs == null or #lists.isEmpty(recentLogs)}" style="color:var(--muted); font-size:0.88rem; padding-top:8px;">
+          No recent activity to display.
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+</body>
+</html>

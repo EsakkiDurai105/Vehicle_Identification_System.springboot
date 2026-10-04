@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account — Vehicle Identification System</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+  <div class="bg-decor"></div>
+
+  <main class="page-center page-content">
+    <section class="login-box">
+      <a th:href="@{/login/user}" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Back to User Login</span>
+      </a>
+
+      <!-- Emblem -->
+      <div class="portal-emblem-wrap">
+        <svg class="portal-emblem" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="47" stroke="#3b82f6" stroke-width="2" fill="#061221"/>
+          <path d="M50 16 C66 16 76 22 76 38 C76 60 50 82 50 82 C50 82 24 60 24 38 C24 22 34 16 50 16 Z" fill="#152e4d" stroke="#60a5fa" stroke-width="1.6"/>
+          <circle cx="50" cy="42" r="10" stroke="#fce289" stroke-width="2"/>
+          <path d="M34 68 C34 56 42 54 50 54 C58 54 66 56 66 68" stroke="#fce289" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <div class="login-header">
+        <span class="login-role-badge user">Account Registration</span>
+        <h1>Create Your Account</h1>
+        <p>Vehicle Identification & Registry System (VIS)</p>
+      </div>
+
+      <div class="alert alert-error" th:if="${registrationError}" th:text="${registrationError}"></div>
+
+      <form th:action="@{/register}" method="post" class="login-form">
+        <div class="form-group">
+          <label class="form-label" for="username">
+            <span>Username</span>
+            <span style="color:#64748b; font-weight:400; text-transform:none;">3-32 chars</span>
+          </label>
+          <input class="form-input" type="text" id="username" name="username"
+                 placeholder="Choose a username" autocomplete="username" minlength="3" maxlength="32"
+                 pattern="[A-Za-z0-9._\-]{3,32}" th:value="${username}" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">
+            <span>Password</span>
+            <span style="color:#64748b; font-weight:400; text-transform:none;">Min. 8 chars</span>
+          </label>
+          <input class="form-input" type="password" id="password" name="password"
+                 placeholder="Enter secure password" autocomplete="new-password" minlength="8"
+                 maxlength="72" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="confirmPassword">
+            <span>Confirm Password</span>
+          </label>
+          <input class="form-input" type="password" id="confirmPassword" name="confirmPassword"
+                 placeholder="Repeat password" autocomplete="new-password" minlength="8"
+                 maxlength="72" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top:6px;">
+          Create Account →
+        </button>
+      </form>
+
+      <div class="portal-security-footer">
+        <span style="color:var(--muted)">Already have an account?</span>
+        <a th:href="@{/login/user}" style="color:var(--gold); font-weight:700;">Sign In</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

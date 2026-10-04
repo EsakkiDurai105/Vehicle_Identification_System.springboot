@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vehicle Identification System — Central Registry</title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- Departmental Sidebar -->
+  <div id="sidebar">
+    <div class="sidebar-logo">
+      <!-- Authority Star & Shield Badge SVG -->
+      <svg class="sidebar-badge-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="47" stroke="#d4af37" stroke-width="2" fill="#061221"/>
+        <circle cx="50" cy="50" r="42" stroke="rgba(212,175,55,0.4)" stroke-width="1" stroke-dasharray="2 2" fill="none"/>
+        <polygon points="50,13 54,28 69,21 62,35 77,42 65,51 73,65 58,67 50,82 42,67 27,65 35,51 23,42 38,35 31,21 46,28" fill="url(#sideGoldGrad)" stroke="#a6841e" stroke-width="0.8"/>
+        <path d="M50 32 C58 32 63 36 63 45 C63 58 50 67 50 67 C50 67 37 58 37 45 C37 36 42 32 50 32 Z" fill="#08182d" stroke="#f3cf65" stroke-width="1.5"/>
+        <path d="M50 38 L50 56 M44 43 L56 43 M41 51 L47 51 M53 51 L59 51 M44 43 L41 51 M56 43 L59 51" stroke="#fce289" stroke-width="1.3" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="sideGoldGrad" x1="20" y1="13" x2="80" y2="82" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#fae59a"/>
+            <stop offset="50%" stop-color="#d4af37"/>
+            <stop offset="100%" stop-color="#917218"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="sidebar-brand-text">
+        <span class="brand-dept-name">Central Registry</span>
+        <span class="brand-system-sub">Vehicle Identification (VIS)</span>
+      </div>
+    </div>
+
+    <div class="sidebar-nav-label">Operations</div>
+
+    <nav>
+      <a class="active" onclick="showPage('dashboard')" data-page="dashboard">
+        <span class="nav-svg-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        </span>
+        <span id="nav-dash-title">Dashboard</span>
+      </a>
+
+      <a class="admin-only" onclick="showPage('owners')" data-page="owners">
+        <span class="nav-svg-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </span>
+        <span>Registered Owners</span>
+      </a>
+
+      <a onclick="showPage('vehicles')" data-page="vehicles">
+        <span class="nav-svg-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line><circle cx="7" cy="15" r="1"></circle><circle cx="17" cy="15" r="1"></circle></svg>
+        </span>
+        <span>Vehicle Repository</span>
+      </a>
+
+      <a class="admin-only" onclick="showPage('insurance')" data-page="insurance">
+        <span class="nav-svg-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </span>
+        <span>Insurance & Regulatory</span>
+      </a>
+
+      <a class="admin-only" onclick="showPage('service')" data-page="service">
+        <span class="nav-svg-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M9 14l2 2 4-4"></path></svg>
+        </span>
+        <span>Inspection Records</span>
+      </a>
+
+      <a onclick="showPage('search')" data-page="search">
+        <span class="nav-svg-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
+        <span>Plate & VIN Lookup</span>
+      </a>
+
+      <a class="admin-only" onclick="showPage('logs')" data-page="logs">
+        <span class="nav-svg-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        </span>
+        <span>Activity & Audit Logs</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-security-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        <span>SECURE REGISTRY // DIV: VIS-01</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Surface -->
+  <div id="main">
+    <header>
+      <div class="header-title-block">
+        <div class="header-breadcrumb">
+          <span>CENTRAL REGISTRY</span>
+          <span class="header-breadcrumb-div">//</span>
+          <span id="breadcrumb-page">Dashboard</span>
+        </div>
+        <h1 id="page-title">Dashboard</h1>
+      </div>
+
+      <div class="header-actions">
+        <span class="badge" id="role-badge">Vehicle Identification System</span>
+        
+        <div class="account-chip">
+          <span class="account-avatar" id="account-avatar">U</span>
+          <div class="account-info">
+            <span class="account-name-text" id="account-name">Account</span>
+            <span class="account-rank-text" id="account-rank">Personnel</span>
+          </div>
+        </div>
+
+        <form action="/logout" method="post" style="display:inline">
+          <button class="btn btn-outline btn-sm" type="submit">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            Sign Out
+          </button>
+        </form>
+      </div>
+    </header>
+
+    <div id="content">
+
+      <!-- ══════ DASHBOARD ══════ -->
+      <div class="page active" id="page-dashboard">
+        <div class="stats">
+          <div class="stat-card admin-only card-owners">
+            <div class="stat-header">
+              <span class="stat-tag">Owner Records</span>
+              <span class="stat-mini-badge">Archived</span>
+            </div>
+            <div class="stat-num" id="stat-owners">0</div>
+            <div class="stat-lbl">Registered Owners</div>
+          </div>
+
+          <div class="stat-card card-vehicles">
+            <div class="stat-header">
+              <span class="stat-tag">Vehicle Fleet</span>
+              <span class="stat-mini-badge">Active</span>
+            </div>
+            <div class="stat-num" id="stat-vehicles">0</div>
+            <div class="stat-lbl">Registered Vehicles</div>
+          </div>
+
+          <div class="stat-card card-insured">
+            <div class="stat-header">
+              <span class="stat-tag">Insurance</span>
+              <span class="stat-mini-badge">Verified</span>
+            </div>
+            <div class="stat-num" id="stat-insured">0</div>
+            <div class="stat-lbl">Insured Vehicles</div>
+          </div>
+
+          <div class="stat-card card-services">
+            <div class="stat-header">
+              <span class="stat-tag">Inspection</span>
+              <span class="stat-mini-badge">Logs</span>
+            </div>
+            <div class="stat-num" id="stat-services">0</div>
+            <div class="stat-lbl">Service & Inspection Logs</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            Recent Vehicle Registrations & Inquiries
+          </div>
+          <div class="table-wrap">
+            <table id="dash-vehicle-table">
+              <thead><tr><th>Reg Plate</th><th>Make / Model</th><th>Owner</th><th>Insurance Status</th><th>Inspection Logs</th></tr></thead>
+              <tbody id="dash-vehicle-body"><tr><td colspan="5" class="empty"><div class="empty-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>No vehicles recorded in registry</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════ OWNERS ══════ -->
+      <div class="page admin-only" id="page-owners">
+        <div class="section-header">
+          <span class="section-title">
+            <svg class="section-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Registered Owners
+          </span>
+          <button class="btn btn-primary" onclick="openModal('modal-add-owner')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Register Owner
+          </button>
+        </div>
+        <div class="card" style="padding:0">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Dossier ID</th><th>Full Name</th><th>Registered Address</th><th>Contact Telephone</th><th>Vehicles Registered</th><th>Actions</th></tr></thead>
+              <tbody id="owners-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════ VEHICLES ══════ -->
+      <div class="page" id="page-vehicles">
+        <div class="section-header">
+          <span class="section-title">
+            <svg class="section-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            Vehicle Repository
+          </span>
+          <button class="btn btn-primary admin-only" onclick="openModal('modal-add-vehicle')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Register Vehicle
+          </button>
+        </div>
+        <div class="card" style="padding:0">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Registration Plate</th><th>Make / Model</th><th>Mileage (km/l)</th><th>Recorded Value (₹)</th><th>Registered Owner</th><th>Compliance Status</th><th>Actions</th></tr></thead>
+              <tbody id="vehicles-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════ INSURANCE ══════ -->
+      <div class="page admin-only" id="page-insurance">
+        <div class="section-header">
+          <span class="section-title">
+            <svg class="section-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Insurance & Regulatory Compliance
+          </span>
+        </div>
+        <div class="card">
+          <div class="card-title">Link Insurance Policy to Registered Vehicle</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Target Vehicle</label>
+              <select id="ins-vehicle-id"></select>
+            </div>
+            <div class="form-group">
+              <label>Policy Number</label>
+              <input id="ins-policy" placeholder="e.g. POL-2026-9042"/>
+            </div>
+            <div class="form-group">
+              <label>Underwriting Carrier</label>
+              <input id="ins-company" placeholder="e.g. National General Insurance"/>
+            </div>
+            <div class="form-group">
+              <label>Coverage Tier</label>
+              <select id="ins-type">
+                <option>Comprehensive Coverage</option>
+                <option>Third Party Liability</option>
+                <option>Zero Depreciation Protection</option>
+                <option>Own Damage Compliance</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label>Policy Validity Term</label>
+              <input id="ins-validity" placeholder="e.g. 2026-2027 or 31-Dec-2027"/>
+            </div>
+          </div>
+          <div style="margin-top:20px">
+            <button class="btn btn-success" onclick="addInsurance()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Record Insurance Policy
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════ SERVICE ══════ -->
+      <div class="page admin-only" id="page-service">
+        <div class="section-header">
+          <span class="section-title">
+            <svg class="section-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M9 14l2 2 4-4"></path></svg>
+            Safety Inspection & Service Logs
+          </span>
+        </div>
+        <div class="card">
+          <div class="card-title">Log New Safety & Maintenance Record</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Vehicle</label>
+              <select id="svc-vehicle-id"></select>
+            </div>
+            <div class="form-group">
+              <label>Certified Workshop / Station</label>
+              <input id="svc-workshop-name" placeholder="e.g. Central Authorized Inspection Facility"/>
+            </div>
+            <div class="form-group full">
+              <label>Station Jurisdiction / Location</label>
+              <input id="svc-location" placeholder="e.g. Chennai Central Inspection Depot"/>
+            </div>
+          </div>
+          <div style="margin-top:20px">
+            <button class="btn btn-success" onclick="addService()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Submit Inspection Record
+            </button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Inspection Archive</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Registration Plate</th><th>Make / Model</th><th>Inspection Station</th><th>Location</th></tr></thead>
+              <tbody id="service-history-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════ SEARCH ══════ -->
+      <div class="page" id="page-search">
+        <div class="section-title" style="margin-bottom:6px">Vehicle Lookup & Verification Terminal</div>
+        <p class="lookup-intro">Search the vehicle repository by registration plate to inspect ownership records, insurance validity, and specifications.</p>
+        <div class="card card-query-terminal">
+          <div style="display:flex; gap:14px; align-items:flex-end">
+            <div class="form-group" style="flex:1">
+              <label for="search-reg">Registration Plate Number</label>
+              <input id="search-reg" autocomplete="off" placeholder="Enter Registration Plate (e.g. VEH1005)" onkeydown="if(event.key==='Enter')searchVehicle()"/>
+            </div>
+            <button class="btn btn-gold" onclick="searchVehicle()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              Run Registry Query
+            </button>
+          </div>
+        </div>
+        <div id="search-result"></div>
+      </div>
+
+      <!-- ══════ LOGS ══════ -->
+      <div class="page admin-only" id="page-logs">
+        <div class="section-header">
+          <span class="section-title">
+            <svg class="section-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            System Activity & Audit Logs
+          </span>
+          <button class="btn btn-outline" onclick="loadLogs()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            Refresh Logs
+          </button>
+        </div>
+        <div class="card">
+          <div id="log-box">Loading audit logs…</div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+
+</div><!-- /app-container -->
+
+<!-- ══════ MODALS ══════ -->
+
+<!-- Add Owner -->
+<div class="modal-overlay" id="modal-add-owner">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Register Owner Record</span>
+      <button class="modal-close" onclick="closeModal('modal-add-owner')">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Full Legal Name</label>
+        <input id="owner-name" placeholder="e.g. Rajesh Kumar"/>
+      </div>
+      <div class="form-group full">
+        <label>Registered Address</label>
+        <input id="owner-address" placeholder="e.g. 12 MG Road, Chennai"/>
+      </div>
+      <div class="form-group full">
+        <label>Primary Contact Telephone</label>
+        <input id="owner-contact" placeholder="e.g. 9876543210"/>
+      </div>
+    </div>
+    <div style="margin-top:22px; display:flex; gap:10px; justify-content:flex-end">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-owner')">Cancel</button>
+      <button class="btn btn-primary" onclick="registerOwner()">Save Owner Record</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Vehicle -->
+<div class="modal-overlay" id="modal-add-vehicle">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Register Vehicle in Repository</span>
+      <button class="modal-close" onclick="closeModal('modal-add-vehicle')">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Registered Owner</label>
+        <select id="veh-owner-id"></select>
+      </div>
+      <div class="form-group full">
+        <label>Make & Model</label>
+        <input id="veh-model" placeholder="e.g. Honda City 1.5 V"/>
+      </div>
+      <div class="form-group">
+        <label>Rated Mileage (km/l)</label>
+        <input id="veh-mileage" type="number" placeholder="e.g. 18.5"/>
+      </div>
+      <div class="form-group">
+        <label>Recorded Value (₹)</label>
+        <input id="veh-cost" type="number" placeholder="e.g. 850000"/>
+      </div>
+    </div>
+    <div style="margin-top:22px; display:flex; gap:10px; justify-content:flex-end">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-vehicle')">Cancel</button>
+      <button class="btn btn-primary" onclick="registerVehicle()">Register Vehicle</button>
+    </div>
+  </div>
+</div>
+
+<!-- Vehicle Detail -->
+<div class="modal-overlay" id="modal-vehicle-detail">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Vehicle Record Dossier</span>
+      <button class="modal-close" onclick="closeModal('modal-vehicle-detail')">✕</button>
+    </div>
+    <div id="vehicle-detail-content"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+const API = '/api';
+let isAdmin = false;
+let csrfToken;
+
+// ── Navigation ──
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  const pageEl = document.getElementById('page-' + name);
+  if (pageEl) pageEl.classList.add('active');
+  const navLink = document.querySelector(`nav a[data-page="${name}"]`);
+  if (navLink) navLink.classList.add('active');
+
+  const pageTitles = {
+    dashboard: 'Dashboard',
+    owners: 'Registered Owners',
+    vehicles: 'Vehicle Repository',
+    insurance: 'Insurance & Regulatory Compliance',
+    service: 'Inspection Records',
+    search: 'Vehicle Lookup',
+    logs: 'Activity & Audit Logs'
+  };
+
+  document.getElementById('page-title').textContent = pageTitles[name] || 'Dashboard';
+  const breadcrumb = document.getElementById('breadcrumb-page');
+  if (breadcrumb) breadcrumb.textContent = pageTitles[name] || 'Dashboard';
+
+  history.replaceState(null, '', `#${name}`);
+  if (name === 'dashboard') loadDashboard();
+  if (name === 'owners') loadOwners();
+  if (name === 'vehicles') loadVehicles();
+  if (name === 'insurance') loadVehicleDropdowns();
+  if (name === 'service') { loadVehicleDropdowns(); loadServiceHistory(); }
+  if (name === 'logs') loadLogs();
+}
+
+// ── Modal ──
+function openModal(id) {
+  if (id === 'modal-add-vehicle' || id === 'modal-add-owner') loadOwnerDropdowns();
+  document.getElementById(id).classList.add('open');
+}
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+// ── Toast ──
+function toast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `show ${type}`;
+  setTimeout(() => t.className = '', 3000);
+}
+
+// ── API helper ──
+async function api(method, path, body) {
+  try {
+    if (method !== 'GET' && !csrfToken) {
+      throw new Error('Your session security token is missing. Please reload and sign in again.');
+    }
+    const headers = { 'Content-Type': 'application/json' };
+    if (method !== 'GET') headers['X-CSRF-TOKEN'] = csrfToken;
+    const res = await fetch(API + path, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined
+    });
+    const data = await res.json();
+    if (res.status === 401) {
+      window.location.assign('/select-role');
+      throw new Error('Your session has expired. Please sign in again.');
+    }
+    if (!res.ok) throw new Error(data.error || JSON.stringify(data));
+    return data;
+  } catch (e) { toast(e.message, 'error'); throw e; }
+}
+
+// ══════ OWNERS ══════
+async function loadOwners() {
+  const owners = await api('GET', '/owners');
+  const tbody = document.getElementById('owners-body');
+  if (!owners.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty">No registered owners recorded.</td></tr>'; return; }
+  tbody.innerHTML = owners.map(o => `
+    <tr>
+      <td><strong>#${o.id}</strong></td>
+      <td><strong>${o.name}</strong></td>
+      <td>${o.address}</td>
+      <td>${o.contact}</td>
+      <td><span class="pill pill-blue">${o.vehicles ? o.vehicles.length : 0} vehicles on file</span></td>
+      <td>
+        <button class="btn btn-outline btn-sm" onclick="deleteOwner(${o.id})">Delete</button>
+      </td>
+    </tr>`).join('');
+}
+
+async function registerOwner() {
+  const name = document.getElementById('owner-name').value.trim();
+  const address = document.getElementById('owner-address').value.trim();
+  const contact = document.getElementById('owner-contact').value.trim();
+  if (!name || !address || !contact) { toast('All fields required', 'error'); return; }
+  await api('POST', '/owners', { name, address, contact });
+  toast('Owner record enrolled successfully!');
+  closeModal('modal-add-owner');
+  document.getElementById('owner-name').value = '';
+  document.getElementById('owner-address').value = '';
+  document.getElementById('owner-contact').value = '';
+  loadOwners();
+}
+
+async function deleteOwner(id) {
+  if (!confirm('Delete this owner record? All associated vehicles will also be removed.')) return;
+  await api('DELETE', `/owners/${id}`);
+  toast('Owner record deleted');
+  loadOwners();
+}
+
+async function loadOwnerDropdowns() {
+  const owners = await api('GET', '/owners');
+  const sels = ['veh-owner-id'];
+  sels.forEach(selId => {
+    const sel = document.getElementById(selId);
+    if (!sel) return;
+    sel.innerHTML = owners.length
+      ? owners.map(o => `<option value="${o.id}">${o.name} (ID: #${o.id})</option>`).join('')
+      : '<option value="">No registered owners found — register one first</option>';
+  });
+}
+
+// ══════ VEHICLES ══════
+async function loadVehicles() {
+  const vehicles = await api('GET', '/vehicles');
+  const tbody = document.getElementById('vehicles-body');
+  if (!vehicles.length) { tbody.innerHTML = `<tr><td colspan="${isAdmin ? 7 : 5}" class="empty">No vehicles currently registered in repository.</td></tr>`; return; }
+  if (!isAdmin) {
+    document.querySelector('#page-vehicles thead').innerHTML = '<tr><th>Registration Plate</th><th>Make / Model</th><th>Mileage</th><th>Compliance Status</th><th>Service Logs</th></tr>';
+    tbody.innerHTML = vehicles.map(v => `
+      <tr>
+        <td><code>${v.regNo}</code></td>
+        <td><strong>${v.model}</strong></td>
+        <td>${v.mileage} km/l</td>
+        <td>${v.insured ? '<span class="pill pill-green">✔ Verified Active</span>' : '<span class="pill pill-red">✖ Uninsured</span>'}</td>
+        <td>${v.serviceCount} records</td>
+      </tr>`).join('');
+    return;
+  }
+  tbody.innerHTML = vehicles.map(v => `
+    <tr>
+      <td><code>${v.regNo}</code></td>
+      <td><strong>${v.model}</strong></td>
+      <td>${v.mileage} km/l</td>
+      <td>₹${v.cost.toLocaleString('en-IN')}</td>
+      <td>${v.owner ? v.owner.name : '—'}</td>
+      <td>${v.insurance
+        ? `<span class="pill pill-green">✔ Verified Active</span>`
+        : `<span class="pill pill-red">✖ Uninsured</span>`}</td>
+      <td style="display:flex;gap:6px">
+        <button class="btn btn-outline btn-sm" onclick="viewVehicle(${v.id})">Inspect</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteVehicle(${v.id})">Delete</button>
+      </td>
+    </tr>`).join('');
+}
+
+async function registerVehicle() {
+  const ownerId = document.getElementById('veh-owner-id').value;
+  const model = document.getElementById('veh-model').value.trim();
+  const mileage = parseFloat(document.getElementById('veh-mileage').value);
+  const cost = parseFloat(document.getElementById('veh-cost').value);
+  if (!ownerId || !model || isNaN(mileage) || isNaN(cost)) { toast('All fields required', 'error'); return; }
+  await api('POST', `/vehicles/owner/${ownerId}`, { model, mileage, cost });
+  toast('Vehicle enrolled in registry!');
+  closeModal('modal-add-vehicle');
+  document.getElementById('veh-model').value = '';
+  document.getElementById('veh-mileage').value = '';
+  document.getElementById('veh-cost').value = '';
+  loadVehicles();
+}
+
+async function deleteVehicle(id) {
+  if (!confirm('Remove this vehicle from the registry?')) return;
+  await api('DELETE', `/vehicles/${id}`);
+  toast('Vehicle removed from registry');
+  loadVehicles();
+}
+
+async function viewVehicle(id) {
+  const v = await api('GET', `/vehicles/${id}`);
+  const el = document.getElementById('vehicle-detail-content');
+  el.innerHTML = `
+    <div class="detail-section" style="border:none; margin:0; padding:0;">
+      <h4>Vehicle Identification</h4>
+      <div class="detail-row"><span class="detail-key">Registration Plate</span><code>${v.regNo}</code></div>
+      <div class="detail-row"><span class="detail-key">Make & Model</span><strong>${v.model}</strong></div>
+      <div class="detail-row"><span class="detail-key">Rated Mileage</span>${v.mileage} km/l</div>
+      <div class="detail-row"><span class="detail-key">Recorded Value</span>₹${v.cost.toLocaleString('en-IN')}</div>
+    </div>
+    ${v.owner ? `
+    <div class="detail-section">
+      <h4>Registered Owner</h4>
+      <div class="detail-row"><span class="detail-key">Full Name</span><strong>${v.owner.name}</strong></div>
+      <div class="detail-row"><span class="detail-key">Registered Address</span>${v.owner.address}</div>
+      <div class="detail-row"><span class="detail-key">Contact Phone</span>${v.owner.contact}</div>
+    </div>` : ''}
+    ${v.insurance ? `
+    <div class="detail-section">
+      <h4>Insurance & Compliance Record</h4>
+      <div class="detail-row"><span class="detail-key">Policy Number</span><strong>${v.insurance.policyNo}</strong></div>
+      <div class="detail-row"><span class="detail-key">Underwriting Carrier</span>${v.insurance.company}</div>
+      <div class="detail-row"><span class="detail-key">Coverage Tier</span>${v.insurance.type}</div>
+      <div class="detail-row"><span class="detail-key">Validity Term</span>${v.insurance.validity}</div>
+    </div>` : '<div class="detail-section"><h4>Insurance Status</h4><span class="pill pill-red">No insurance policy recorded</span></div>'}
+    ${v.serviceHistory && v.serviceHistory.length ? `
+    <div class="detail-section">
+      <h4>Inspection & Service Archive (${v.serviceHistory.length} logs)</h4>
+      ${v.serviceHistory.map(s => `
+        <div class="detail-row"><span class="detail-key">${s.name}</span>${s.location}</div>`).join('')}
+    </div>` : '<div class="detail-section"><h4>Inspection History</h4><p style="color:var(--text-muted);font-size:.84rem">No inspection records logged</p></div>'}
+  `;
+  openModal('modal-vehicle-detail');
+}
+
+// ══════ INSURANCE ══════
+async function loadVehicleDropdowns() {
+  const vehicles = await api('GET', '/vehicles');
+  ['ins-vehicle-id', 'svc-vehicle-id'].forEach(selId => {
+    const sel = document.getElementById(selId);
+    if (!sel) return;
+    sel.innerHTML = vehicles.length
+      ? vehicles.map(v => `<option value="${v.id}">${v.regNo} — ${v.model}</option>`).join('')
+      : '<option value="">No vehicles found in registry</option>';
+  });
+}
+
+async function addInsurance() {
+  const vehicleId = document.getElementById('ins-vehicle-id').value;
+  const policyNo = document.getElementById('ins-policy').value.trim();
+  const company = document.getElementById('ins-company').value.trim();
+  const type = document.getElementById('ins-type').value;
+  const validity = document.getElementById('ins-validity').value.trim();
+  if (!vehicleId || !policyNo || !company || !validity) { toast('All fields required', 'error'); return; }
+  await api('POST', `/vehicles/${vehicleId}/insurance`, { policyNo, company, type, validity });
+  toast('Insurance policy recorded successfully!');
+  ['ins-policy','ins-company','ins-validity'].forEach(id => document.getElementById(id).value = '');
+}
+
+// ══════ SERVICE ══════
+async function addService() {
+  const vehicleId = document.getElementById('svc-vehicle-id').value;
+  const name = document.getElementById('svc-workshop-name').value.trim();
+  const location = document.getElementById('svc-location').value.trim();
+  if (!vehicleId || !name || !location) { toast('All fields required', 'error'); return; }
+  await api('POST', `/vehicles/${vehicleId}/service`, { name, location });
+  toast('Inspection record archived!');
+  document.getElementById('svc-workshop-name').value = '';
+  document.getElementById('svc-location').value = '';
+  loadServiceHistory();
+}
+
+async function loadServiceHistory() {
+  const vehicles = await api('GET', '/vehicles');
+  const tbody = document.getElementById('service-history-body');
+  const rows = [];
+  vehicles.forEach(v => {
+    if (v.serviceHistory) {
+      v.serviceHistory.forEach(s => rows.push({ regNo: v.regNo, model: v.model, workshop: s.name, location: s.location }));
+    }
+  });
+  tbody.innerHTML = rows.length
+    ? rows.map(r => `<tr><td><code>${r.regNo}</code></td><td><strong>${r.model}</strong></td><td>${r.workshop}</td><td>${r.location}</td></tr>`).join('')
+    : '<tr><td colspan="4" class="empty">No inspection records logged in registry</td></tr>';
+}
+
+// ══════ SEARCH ══════
+async function searchVehicle() {
+  const reg = document.getElementById('search-reg').value.trim().toUpperCase();
+  if (!reg) { toast('Enter a registration plate number', 'error'); return; }
+  const el = document.getElementById('search-result');
+  el.innerHTML = '<div class="card" style="color:var(--text-muted); font-size:0.9rem;">Querying vehicle database…</div>';
+  try {
+    const v = await api('GET', `/vehicles/search/${reg}`);
+    el.innerHTML = `
+      <div class="card">
+        <div class="lookup-record-head">
+          <div>
+            <span class="record-kicker">VERIFIED REGISTRY DOSSIER</span>
+            <div class="card-title" style="margin-top:4px;">
+              <code>${v.regNo}</code>
+              <span>${v.model}</span>
+            </div>
+          </div>
+          <span class="pill ${v.insurance ? 'pill-green' : 'pill-orange'}">
+            ${v.insurance ? '✔ Insured & Compliant' : '⚠ Insurance Not On File'}
+          </span>
+        </div>
+        <div class="lookup-grid">
+          <div class="detail-row"><span class="detail-key">Registration Plate</span><code>${v.regNo}</code></div>
+          <div class="detail-row"><span class="detail-key">Vehicle Model</span><strong>${v.model}</strong></div>
+          <div class="detail-row"><span class="detail-key">Rated Mileage</span>${Number(v.mileage).toLocaleString('en-IN')} km/l</div>
+          <div class="detail-row"><span class="detail-key">Recorded Value</span>₹${Number(v.cost).toLocaleString('en-IN')}</div>
+        </div>
+        ${v.owner ? `
+        <div class="detail-section">
+          <h4>Registered Owner</h4>
+          <div class="detail-row"><span class="detail-key">Full Name</span><strong>${v.owner.name}</strong></div>
+          <div class="detail-row"><span class="detail-key">Registered Address</span>${v.owner.address}</div>
+          <div class="detail-row"><span class="detail-key">Contact Phone</span>${v.owner.contact}</div>
+        </div>` : ''}
+        ${v.insurance ? `
+        <div class="detail-section">
+          <h4>Insurance Policy Verification</h4>
+          <div class="detail-row"><span class="detail-key">Policy Number</span><strong>${v.insurance.policyNo}</strong></div>
+          <div class="detail-row"><span class="detail-key">Underwriter</span>${v.insurance.company}</div>
+          <div class="detail-row"><span class="detail-key">Coverage Type</span>${v.insurance.type}</div>
+          <div class="detail-row"><span class="detail-key">Policy Term</span>${v.insurance.validity}</div>
+        </div>` : '<div class="detail-section"><h4>Insurance Status</h4><span class="pill pill-red">No insurance policy recorded for this vehicle</span></div>'}
+        ${v.serviceHistory && v.serviceHistory.length ? `
+        <div class="detail-section">
+          <h4>Certified Inspection History (${v.serviceHistory.length} logs)</h4>
+          ${v.serviceHistory.map(s => `<div class="detail-row"><span class="detail-key">${s.name}</span>${s.location}</div>`).join('')}
+        </div>` : '<div class="detail-section"><h4>Inspection Records</h4><p style="color:var(--text-muted);font-size:.84rem">No inspection records logged</p></div>'}
+      </div>`;
+  } catch(e) {
+    el.innerHTML = `
+      <div class="card" style="border-left:4px solid var(--gold); background:#fcfcfd;">
+        <strong style="color:#0b1a2e; font-size:0.95rem;">No Matching Registry Record</strong>
+        <p style="color:var(--text-muted); font-size:0.86rem; margin-top:4px;">No vehicle matching plate number "${reg}" was found in the database.</p>
+      </div>`;
+  }
+}
+
+// ══════ LOGS ══════
+async function loadLogs() {
+  const logs = await api('GET', '/logs');
+  const box = document.getElementById('log-box');
+  box.innerHTML = logs.length
+    ? logs.reverse().map(l => `<div><span style="color:#f3cf65;">[AUDIT]</span> ${l}</div>`).join('')
+    : '<div style="color:#64748b">No activity logged in current cycle.</div>';
+}
+
+// ══════ DASHBOARD ══════
+async function loadDashboard() {
+  const vehicles = await api('GET', '/vehicles');
+  const owners = isAdmin ? await api('GET', '/owners') : [];
+  if (isAdmin) document.getElementById('stat-owners').textContent = owners.length;
+  document.getElementById('stat-vehicles').textContent = vehicles.length;
+  document.getElementById('stat-insured').textContent = vehicles.filter(v => isAdmin ? v.insurance : v.insured).length;
+  const svcCount = vehicles.reduce((acc, v) => acc + (isAdmin ? (v.serviceHistory ? v.serviceHistory.length : 0) : v.serviceCount), 0);
+  document.getElementById('stat-services').textContent = svcCount;
+
+  const tbody = document.getElementById('dash-vehicle-body');
+  const recent = vehicles.slice(-8).reverse();
+  if (!isAdmin) {
+    document.querySelector('#dash-vehicle-table thead').innerHTML = '<tr><th>Reg Plate</th><th>Make / Model</th><th>Mileage</th><th>Insurance Status</th><th>Inspection Logs</th></tr>';
+  }
+  tbody.innerHTML = recent.length
+    ? recent.map(v => isAdmin ? `
+      <tr>
+        <td><code>${v.regNo}</code></td>
+        <td><strong>${v.model}</strong></td>
+        <td>${v.owner ? v.owner.name : '—'}</td>
+        <td>${v.insurance ? '<span class="pill pill-green">✔ Verified Active</span>' : '<span class="pill pill-red">✖ Uninsured</span>'}</td>
+        <td>${v.serviceHistory ? v.serviceHistory.length : 0} logs</td>
+      </tr>` : `
+      <tr>
+        <td><code>${v.regNo}</code></td>
+        <td><strong>${v.model}</strong></td>
+        <td>${v.mileage} km/l</td>
+        <td>${v.insured ? '<span class="pill pill-green">✔ Verified Active</span>' : '<span class="pill pill-red">✖ Uninsured</span>'}</td>
+        <td>${v.serviceCount} logs</td>
+      </tr>`).join('')
+    : '<tr><td colspan="5" class="empty">No vehicles recorded in registry</td></tr>';
+}
+
+async function startApp() {
+  try {
+    const response = await fetch(`${API}/session`);
+    if (!response.ok) {
+      window.location.replace('/select-role');
+      return;
+    }
+    const account = await response.json();
+    csrfToken = account.csrfToken;
+    isAdmin = account.role === 'ADMIN';
+
+    // Account information display
+    document.getElementById('account-name').textContent = account.username;
+    document.getElementById('account-avatar').textContent = account.username.charAt(0).toUpperCase();
+
+    const roleBadge = document.getElementById('role-badge');
+    const accountRank = document.getElementById('account-rank');
+    const navDashTitle = document.getElementById('nav-dash-title');
+
+    if (isAdmin) {
+      roleBadge.className = 'badge badge-admin';
+      roleBadge.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Administrator • Full Access';
+      accountRank.textContent = 'Administrator';
+      if (navDashTitle) navDashTitle.textContent = 'Dashboard';
+    } else {
+      roleBadge.className = 'badge badge-officer';
+      roleBadge.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Authorized Access • Read-Only';
+      accountRank.textContent = 'Authorized User';
+      if (navDashTitle) navDashTitle.textContent = 'Dashboard';
+      document.querySelectorAll('.admin-only').forEach(element => element.remove());
+    }
+
+    document.body.classList.add('authenticated');
+    const requestedPage = window.location.hash.slice(1);
+    showPage(requestedPage && document.getElementById(`page-${requestedPage}`) ? requestedPage : 'dashboard');
+  } catch (error) {
+    window.location.replace('/select-role');
+  }
+}
+
+startApp();
+</script>
+</body>
+</html>
